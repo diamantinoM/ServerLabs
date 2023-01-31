@@ -1,0 +1,28 @@
+The basic idea of data abstraction is to structure the programs that are
+to use compound data objects so that they operate on “abstract data.”
+That is, our programs should use data in such a way as to make no
+assump- tions about the data that are not strictly necessary for
+performing the task at hand. At the same time, a “concrete” data
+representation is defined in- dependent of the programs that use the
+data. The interface between these two parts of our system will be a set
+of procedures, called selectors and con- structors, that implement the
+abstract data in terms of the concrete repre- sentation. To illustrate
+this technique, we will consider how to design a set of procedures for
+manipulating rational numbers.
+
+We can envision the structure of the rational-number system as shown in
+Figure 2.1. The horizontal lines represent abstraction barriers that
+isolate different “levels” of the system. At each level, the barrier
+separates the pro- grams (above) that use the data abstraction from the
+programs (below) that implement the data abstraction. Programs that use
+rational numbers ma- nipulate them solely in terms of the procedures
+supplied “for public use” by the rational-number package: add-rat, 
+sub-rat, mul-rat, div-rat, and
+equal-rat?. These, in turn, are implemented solely in terms of the con-
+structor and selectors make-rat, numer, and denom, which themselves are
+implemented in terms of pairs. The details of how pairs are implemented
+are irrelevant to the rest of the rational-number package so long as
+pairs can be manipulated by the use of cons, car, and cdr. In effect,
+procedures at each level are the interfaces that define the abstraction
+barriers and con- nect the different levels.
+

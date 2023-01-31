@@ -1,0 +1,156 @@
+Frontend         : Interface para o utilizador
+
+Backend          : Gestão da informação, controlo de acesso/autenticação,
+                   acesso a serviços, etc.
+
+Camada Bases Dados : Gestão e manutenção da estrutura da informação,
+                     acesso aos dados
+
+--------------------------------------------------------------------------------
+
+Cliente  : Componente que interage com o utilizador e coloca pedidos ao servidor
+           O browser é um tipo de cliente, mas poderão existir outros 
+           tipos de clientes.
+
+Servidor : Componente remoto que atende os pedidos dos múltiplos clientes
+Web
+
+Servidor : Componente acessível atráves do Servidor Web especializado 
+de Dados   em serviços relacionados com bases de dados. Tipicamente,
+           é um SGBDR (Sistema de Gestão de Bases de Dados Relacionais),
+           mas pode ser outro tipo de servidor de dados (eg, MongoDB, 
+           Redis, Cassandra, etc.)
+
+--------------------------------------------------------------------------------
+
+A maioria das aplicações Web organiza-se de uma das seguintes formas:
+
+1) APLICAÇÃO WEB "TRADICIONAL" COM SERVER SIDE RENDERING (SSR)
+    
+    - O frontend divide-se entre o cliente e o servidor
+
+    - Ou seja, parte da interface com o utilizador é processada no browser 
+      e parte no servidor
+
+    - O HTML (e até o CSS e JS) é obtido a partir de duas vias
+
+        . Páginas estáticas: páginas que estão concluídas e portanto o HTML
+          já foi todo elaborado. Estas páginas são descarregadas do 
+          servidor para o cliente (como se de ficheiros se tratassem)
+
+        . Páginas dinâmicas: páginas que são geradas no servidor (ou seja,
+          Server Side Rendering ou SSR), utilizando dados produzidos pelo
+          próprio servidor web ou obtidos a partir de uma BD.
+
+    - Existem várias formas de produzir o HTML para páginas dinâmicas, mas
+      uma das mais populares é através de linguagens de template que "adicionam"
+      lógica (decisões, ciclos, etc.) ao HTML
+
+    - Qualquer alteração de estado na interface, leva a recarregamento da 
+      página (ou de parte dela), porque é necessário ir ao servidor produzir
+      o HTML com as alterações
+
+    - Por vezes, até a utilização dos botões "Back" e "Forward" leva a 
+      recarregamentos de páginas a partir do servidor
+
+    - Experiência de utilização deste tipo de aplicação Web é muito diferente 
+      da que obtém quando se utiliza uma App Desktop ou Móvel
+
+    - Não é obrigatório, mas a maioria destas aplicações são desenvolvidas 
+      utilizando uma arquitectura MVC (Model View Controller)
+
+    - Exemplo de frameworks/bibliotecas: Ruby OnRails (Ruby), Laravel (PHP),
+            Spring (Java), Django (Python), Entity Framework (C#), 
+
+    - Estas frameworks são server-side
+
+      (NOTA: framework -> infraestrutura)
+
+
+2) SINGLE-PAGE APPLICATION (SPA) COM CLIENT SIDE RENDERING (CSR)
+
+    - O frontend está todo do lado do cliente, inclusive parte do backend
+      pode também estar no lado do cliente.
+
+    - A aplicação é toda descarregada a partir do servidor
+
+    - Também existem páginas estáticas e dinâmicas
+
+    - Nas SPAs utiliza-se mais termos como "View" ou "Screen" em vez 
+      de página
+
+    - O HTML para as dinâmicas é gerado no cliente utilizando JavaScript
+
+    - O servidor web actua mais como um ponto de acesso a serviços, como 
+      uma API (Application Programming Interface), serviços esses que 
+      normalmente envolvem acesso ao SGBDR
+
+    - Back e Forward não levam a acessos ao servidor
+
+    - Experiência de utilização de uma SPA é semelhante a utilizar uma 
+      aplicação Desktop ou Móvel
+
+    - Por isto mesmo, é mais fácil de transformar uma SPA numa aplicação
+      nativa de um sistema operativo
+
+    - É mais difícil ter bookmarks/favoritos para páginas de uma SPA
+
+    - E como o HTML é gerado dinâmicamente no cliente, as páginas são 
+      mais difíceis de indexar pelos motores de busca, ou seja, é 
+      mais difícil conseguir SEO (Search Engine Optimization).
+
+    - Para aplicações pequenas, são mais difíceis de preparar (setup)
+      e de gerir
+
+    - Por outro lado, facilitam as tarefas do servidor e permitem que 
+      servidor possa ter outros tipos de clientes
+
+    - Exemplo de frameworks/bibliotecas: React, Angular, Vue.js, Svelt, Ember, 
+      etc.      
+
+    - Estas frameworks são client-side
+
+3) COMBINAR SPA COM APLICAÇÕES WEB TRADICIONAIS
+
+    - Não é fácil decidir o que fica do lado do cliente e o que fica do 
+      lado do servidor
+
+    - Precisamos de mais tecnologias
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+. React + Express (Node.js)
+
+. Vue.js + Express (Node.js)
+
+. React + Flask
+
+. React + FastAPI
+
+
+--------------------------------------------------------------------------------
+
+Biblioteca / Framework (Infraestrutura)
+
+--------------------------------------------------------------------------------
+
+    . Django  : MVC, Aplicações Web Tradicionais, Complexo, SSR, muitas extensões,
+                grande comunidade, estabelecida
+                "Mais complicado para aplicações simples, mais simples para 
+                 aplicações complicadas (grandes)"
+
+    . Flask   : Micro-framework, Aplicações, API p/ serviços, muitas extensões,
+                grande comunidade, estabelecida
+
+                "Mais simples para aplicações simples, mais complicados para 
+                 aplicações complicadas" (o mesmo aplica-se ao FastAPI)
+
+    . FastAPI : Micro-framework, Aplicações, API p/ serviços, parecida/baseada 
+                com/no Flask, muito mais rápida do que Flask e Django, 
+                suporta de origem programação assíncrona, mais recente, menos 
+                extensões
+
+

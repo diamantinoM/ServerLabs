@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="call_server.css">
+    <script type="module">
+        const URL = 'http://127.0.0.1:8000';
+
+        window.addEventListener('load', function() {
+            whenClick('btnHello3', helloGET);
+            whenClick('btnHello4', helloPOSTasJSON);
+            whenClick('btnHello5', helloPOSTasFormData);
+
+            function whenClick(id, handler) {
+                document.getElementById(id).addEventListener('click', handler);
+            }
+        });
+
+
+        async function helloGET() {
+            const name = document.querySelector('#formHello3 input[name="name"]').value;
+            const fetchURL = `${URL}/hello3/${name}`;
+            try {
+                alert(await byGET(fetchURL));
+            }
+            catch (error) {
+                console.error("ERROR:", error);
+            }
+        }
+
+        async function helloPOSTasJSON() {
+            const name = document.querySelector('#formHello4 input[name="name"]').value;
+            const fetchURL = `${URL}/hello4`;
+            try {
+                alert(await byPOSTasJSON(fetchURL, {name}));
+            }
+            catch (error) {
+                console.error("ERROR:", error);
+            }
+        }
+
+        async function helloPOSTasFormData() {
+            const name = document.querySelector('#formHello5 input[name="name"]').value;
+            const fetchURL = `${URL}/hello2`;
+            try {
+                alert(await byPOSTasFormData(fetchURL, {name}));
+            }
+            catch (error) {
+                console.error("ERROR:", error);
+            }
+        }
+
+        async function byGET(fetchURL, responseAsJSON=true) {
+            // https://javascript.info/fetch
+            // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+            const resp = await fetch(fetchURL, {
+                method: 'GET',
+                mode: 'cors',
+            });
+            return responseAsJSON ? resp.json(): resp.text();
+        }
+
+        async function byPOSTasJSON(fetchURL, dataObj, responseAsJSON=true) {
+            const resp = await fetch(fetchURL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataObj),
+                });
+            return responseAsJSON ? resp.json(): resp.text();
+        }
+
+        async function byPOSTasFormData(fetchURL, dataObj, responseAsJSON=true) {
+            const resp = await fetch(fetchURL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(dataObj),
+                    // body: data
+                });
+            return responseAsJSON ? resp.json(): resp.text();
+        }
+
+    </script>
+</head>
+<body>
+        <!--
+            https://stackoverflow.com/questions/68675773/why-my-formdata-post-isnt-blocked-by-cors-policy
+        -->
+    <section>
+        <h1>Envio do dados do formulário pelo Browser</h1>
+        <form id="formHello1" action="http://127.0.0.1:8000/hello1" method="GET">
+            <h2>Hello 1 - GET/URL *Query* Parameters</h2>
+            <div>
+                <label>Nome</label>
+                <input type="text" name="name">
+                <button id="btnHello1" type="submit">Hello</button>
+            </div>
+        </form>
+        <form id="formHello2" action="http://127.0.0.1:8000/hello2" method="POST">
+            <h2>Hello 2 - POST/REQUEST *Body* Parameters</h2>
+            <div>
+                <label>Nome</label>
+                <input type="text" name="name">
+                <button id="btnHello2" type="submit">Hello</button>
+            </div>
+        </form>
+    </section>
+
+    <section>
+        <h1>Envio (assíncrono) do dados do formulário através de FETCH</h1>
+        <form id="formHello3">
+            <h2>Hello 3 - GET/URL *Path* Parameters</h2>
+            <div>
+                <label>Nome</label>
+                <input type="text" name="name">
+                <button id="btnHello3" type="button">Hello</button>
+            </div>
+        </form>
+        <form id="formHello4">
+            <h2>Hello 4 - POST/REQUEST *Body* Parameters (JSON)</h2>
+            <div>
+                <label>Nome</label>
+                <input type="text" name="name">
+                <input type="text" name="surname">
+                <input type="number" name="age">
+                <button id="btnHello4" type="button">Hello</button>
+            </div>
+        </form>
+        <form id="formHello5">
+            <h2>Hello 5 - POST/REQUEST *Body* Parameters (Form Data)</h2>
+            <div>
+                <label>Nome</label>
+                <input type="text" name="name">
+                <button id="btnHello5" type="button">Hello</button>
+            </div>
+        </form>
+    </section>
+
+</body>
+</html>

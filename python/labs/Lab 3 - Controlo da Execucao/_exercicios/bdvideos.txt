@@ -1,0 +1,23 @@
+// ID,título,título original,realizador,géneros, data e duração (minutos)
+
+# Comédia, Drama, Romance
+13,Sideways,Sideways,Alexander Payne,Comédia/Drama/Romance,2004-09-13,127
+43,O Despertar da Mente,Eternal Sunshine of the Spotless Mind,Michel Gondry,Romance/Drama/Ficção Científica,2004-03-19,108
+172,American Splendor,American Splendor,Shari Springer Berman,Biografia/Comédia/Drama,2003-09-12,101
+
+# Crime, Drama
+47,Pulp Fiction,Pulp Fiction,Quentin Tarantino,Crime/Drama/Comédia Negra,1994-10-14,154
+57,Cães Danados,Reservoir Dogs,Quentin Tarantino,Crime/Drama,1992-10-23,99
+
+# Ficção científica
+19,Regresso ao Futuro,Back to the Future, Robert Zemeckis,Ficção Científica,1985-07-03,116
+21,Regresso ao Futuro Parte II,Back To the Future Part II,Robert Zemeckis,Ficção Científica,1989-11-22,108
+23,Regresso ao Futuro Parte III,Back To the Future Part III,Robert Zemeckis,Ficção Científica,1990-05-25,122
+17,2001: Odisseia no Espaço,2001: A Space Odyssey,Stanley Kubrick,Ficção Científica,1968-04-02,161
+
+# Westerns e Aventura
+135,O Bom O Mau e o Vilão,The Good the Bad and The Ugly,Sergio Leone,Western,1966-12-15,177
+144,Danças Com Lobos,Dances with Wolves,Kevin Costner,Aventura/Western/Drama,1990-11-21,181
+
+# Históricos
+202,O Último Imperador,The Last Emperor,Bernardo Bertolucci,Histórico/Biográfico/Drama,1988-04-15,163

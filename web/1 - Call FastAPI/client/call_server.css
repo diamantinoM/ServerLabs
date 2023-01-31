@@ -1,0 +1,46 @@
+body {
+    padding: 3em;
+}
+section {
+    border: 3px dotted black;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+section + section {
+    margin-top: 1em;
+}
+h1 {
+    grid-column: 1/3;
+}
+form {
+    padding: 1em;
+    border: 2px solid rgb(136, 29, 29);
+    background-color: aliceblue;
+    width: 400px;
+    margin-top: 0.5em;
+}
+button {
+    display: inline-block;
+    width: 5em;
+    padding: 5px;
+}
+label, input {
+    padding: 5px;
+    font-weight: bold;
+}
+label + input, input + button, input + label {
+    margin-left: 0.2em;
+}
+input {
+    display: inline-block;
+    width: 7em;
+}
+h2 {
+    font-size: medium;
+    margin-bottom: 2em;
+}
+#formSum1 input, #formSum2 input {
+    width: 3em;
+}

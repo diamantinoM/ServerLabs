@@ -1,0 +1,30 @@
+x, y = 2.789, 3.1
+
+"-> {0:.2f} # {1:07.3f} # {0:f} <-".format(x, y) =>  -> 2.79 # 003.100 # 2.789000 <-
+                                                               -------
+OU
+
+f"-> {x:.2f} # {y:07.3f} # {x:f} <-"
+
+{0:.2f}
+    0  -> primeiro argumento do format
+    f  -> formata como número decimal 
+    .2 -> 2 casas decimais (acrescenta 0 se tiver < do 2 c.d., arredonda se tiver mais)
+
+{1:07.3f}
+    1 -> segundo argumento do format
+    f -> ...
+    07 -> 7 indica o número de espaços reservados para o número (incluindo o '.')
+          0 indica que espaços a mais (à esquerda) devem ser preenchidos com 0s
+
+
+--
+    Alinhamento:
+
+    y = 3.1
+
+    "->{0:07.3f}<-".format(y)   => "->003.100<-"
+    "->{0:7.3f}<-".format(y)    => "->  3.100<-"  (*)
+    "->{0:<7.3f}<-".format(y)   => "->3.100  <-"
+    "->{0:>7.3f}<-".format(y)   => "->  3.100<-"  (*)
+    "->{0:^7.3f}<-".format(y)   => "-> 3.100 <-"  

@@ -1,0 +1,79 @@
+##
+## General 
+
+PATH=$PATH:.:/Users/jfgmmg/local/bin
+export PATH
+
+DEFAULT_LANG="pt_PT.UTF-8"
+if [[ $- == *i* ]]; then
+	if [ -z "$LANG" -o "$LANG" == "" ]; then
+		echo "Setting LANG to "$DEFAULT_LANG
+		export LANG=$DEFAULT_LANG
+	else
+		echo "LANG already set to "$LANG". No changes were made."
+	fi
+
+	if [ -z "$LC_ALL" -o "$LC_ALL" == "" ]; then
+		echo "Setting LC_ALL to "$DEFAULT_LANG
+		export LC_ALL=$DEFAULT_LANG
+	else
+		echo "LC_ALL already set to "$LC_ALL". No changes were made."
+	fi
+fi
+
+##
+## Lisp 
+
+SBCL_HOME=/Users/jfgmmg/local/lib/sbcl/lib/sbcl
+export SBCL_HOME
+
+##
+## Python
+
+
+##
+## C/C++ 
+
+# Setting PATHs for C++ Dynamic Libraries 
+export DYLD_LIBRARY_PATH=.:/usr/lib:/Users/jfgmmg/local/lib/cpp/boost/stage/lib:/Applications/LibreOffice.app/Contents/Frameworks
+
+#PATH="/Users/jfgmmg/Qt/5.2.1/clang_64/bin:${PATH}"
+#export PATH
+
+# Setting PATH for Python 3.5
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+export PATH
+
+PATH="/usr/local/openssl/bin:$PATH"
+export PATH
+MANPATH="/usr/local/openssl/ssl/man:$MANPATH"
+export MANPATH
+
+ANT_HOME=/Users/jfgmmg/local/bin/ant
+export ANT_HOME
+PATH=$PATH:$ANT_HOME/bin
+export PATH
+
+
+INCLUDE_PATH="-I /Users/jfgmmg/local/lib/cpp/ -I /Users/jfgmmg/local/lib/cpp/boost/"
+export INCLUDE_PATH
+LIBRARY_PATH=$LIBRARY_PATH:/Users/jfgmmg/local/lib/cpp/boost/stage/lib
+export LIBRARY_PATH
+
+##
+## Load alias
+
+if [ -e ~/local/bin/commands.alias ]; then
+    # Load aliases only in interactive mode 
+    # $- holds BASH options; the IF tests if the 'i' option is included 
+    if [[ $- == *i* ]]; then
+        echo "Loading aliases"
+        source ~/local/bin/commands.alias
+    fi
+fi
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH

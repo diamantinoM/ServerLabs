@@ -1,0 +1,16 @@
+# Despesas da mercearia
+Fruta,27-04-2015,4.75
+Detergente Máquina da Loiça,27-04-2015,
+Pão,28-04-2015,3.75
+Iogurte,28-04-2015,1.89
+Pilhas,28-04-2015,8.98
+Pilhas,28-04-2015,YXY8.98
+
+# Despesas do talho
+Vazia,27-05-2015,10.19
+Coelho,27-05-2015,15.75
+Coelho,27-15-2015,15.75
+
+
+
+ 
