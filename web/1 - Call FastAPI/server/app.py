@@ -55,6 +55,20 @@ async def hello4(name: NameArgs):
 #:
 
 ################################################################################
+#TPC
+@app.get('/sum1/{num1}/{num2}')
+async def sum1(num1: int, num2: int):
+    return f"num1+num2= {num1 + num2}"
+#:GET
+
+class NumsArgs(BaseModel):
+    num1: int
+    num2: int
+#:
+@app.post('/sum2')
+async def sum2():
+    return f"Hello: "
+#:JSONPOST
 
 
 ################################################################################
