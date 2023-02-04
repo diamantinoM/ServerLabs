@@ -13,12 +13,37 @@
             whenClick('btnHello3', helloGET);
             whenClick('btnHello4', helloPOSTasJSON);
             whenClick('btnHello5', helloPOSTasFormData);
+            whenClick('btnSum1', sumGET)
+            whenClick('btnSum2', sumPOSTasJSON);
 
             function whenClick(id, handler) {
                 document.getElementById(id).addEventListener('click', handler);
             }
         });
 
+       async function sumGET() {
+            const num1 = document.querySelector('#formSum1 input[name="num1"]').value;
+            const num2 = document.querySelector('#formSum1 input[name="num2"]').value;
+            const fetchURL = `${URL}/sum1/${num1}/${num2}`;
+            try {
+                alert(await byGET(fetchURL));
+            }
+            catch (error) {
+                console.error("ERROR:", error);
+            }
+        }
+
+        async function sumPOSTasJSON() {
+            const num1 = document.querySelector('#formSum2 input[name="num1"]').value;
+            const num2 = document.querySelector('#formSum2 input[name="num2"]').value;
+            const fetchURL = `${URL}/sum2`;
+            try {
+                alert(await byPOSTasJSON(fetchURL, {num1, num2}));
+            }
+            catch (error) {
+                console.error("ERROR:", error);
+            }
+        }
 
         async function helloGET() {
             const name = document.querySelector('#formHello3 input[name="name"]').value;
@@ -141,6 +166,41 @@
                 <label>Nome</label>
                 <input type="text" name="name">
                 <button id="btnHello5" type="button">Hello</button>
+            </div>
+        </form>
+        <!--
+        <h1>ENVIO DOS DADOS PELO BROWSER</h1>
+            <form id="formSum1" action="http://127.0.0.1:8000/sum1" method="GET">
+                <h2>SUM1 - GET/URL *Query* Parameters</h2>
+                <div>
+                    <label>Num1</label>
+                    <input type="number" name="num1">
+                    <label>Num2</label>
+                    <input type="number" name="num2">
+                    <button id="btnSum1" type="button">SUM</button>
+                </div>
+            </form>
+        -->
+
+        <form id="formSum1">
+            <h2>SUM1 - GET/URL *Query* Parameters</h2>
+            <div>
+                <label>Num1</label>
+                <input type="number" name="num1">
+                <label>Num2</label>
+                <input type="number" name="num2">
+                <button id="btnSum1" type="button">SUM</button>
+            </div>
+        </form>
+
+        <form id="formSum2">
+            <h2>SUM 2 - POST/REQUEST *Body* Parameters (JSON)</h2>
+            <div>
+                <label>Num1</label>
+                <input type="number" name="num1">
+                <label>Num2</label>
+                <input type="number" name="num2">
+                <button id="btnSum2" type="button">SUM</button>
             </div>
         </form>
     </section>
