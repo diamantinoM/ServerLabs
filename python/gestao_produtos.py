@@ -63,6 +63,18 @@ class Produto:
         self.preco = preco
 
 
+    @classmethod
+    def from_csv(cls, linha: str, delim = CSV_DEFAULT_DELIM) -> 'Produto':
+        attrs = linha.split(delim)
+        return cls(
+            id_ = int(attrs[0]),
+            nome = attrs[1],
+            tipo = attrs[2],
+            quantidade = int(attrs[3]),
+            preco = dec(attrs[4]),
+        )
+
+
     @property
     def desc_tipo(self) -> str:
         return PRODUCT_TYPES[self.tipo]
@@ -70,11 +82,11 @@ class Produto:
 
     def __str__(self) -> str:
         cls_name = self.__class__.__name__
-        return f'{cls_name}[id_={self.id_}  nome= "{self.nome}" tipo = "{self.tipo}"]'
+        return f'{cls_name}[id_ = {self.id_}  nome = "{self.nome}" tipo = "{self.tipo}"]'
 
     def __repr__(self) -> str:
         cls_name = self.__class__.__name__
-        return f'{cls_name}(id_={self.id_}, nome={self.nome}, tipo={self.tipo}, quantidade={self.quantidade}, preco={repr(self.preco)})'
+        return f'{cls_name}(id_ ={self.id_}, nome={self.nome}, tipo={self.tipo}, quantidade={self.quantidade}, preco={repr(self.preco)})'
 
     def com_iva(self, taxa_iva: dec) -> dec:
         return self.preco * (1 + taxa_iva/100)
@@ -133,14 +145,117 @@ class DuplicateValue(Exception):
     pass
 
 
-def main() -> None:
-    produtos = CatalogoProdutos()
-    produtos.append(Produto(30987, 'pão de milho', 'AL', 2, dec('1')))
-    produtos.append(Produto(30098, 'leite mimosa', 'AL', 10, dec('2')))
-    produtos.append(Produto(21109, 'fairy', 'DL', 20, dec('3')))
-    # produtos.append(Produto(21109, 'fairy', 'DL', 20, dec('3')))
+###################################################################################
+##
+##          LEITURA DE FICHEIROS
+##
+###################################################################################
+
+def le_produtos(caminho_fich: str, delim = CSV_DEFAULT_DELIM) -> CatalogoProdutos:
+    prods = CatalogoProdutos()
+    # ler ficheiro e popular catalogo com cada um dos produtos
+    # uma linha do ficheiro corresponde a um produto
+    with open(caminho_fich, 'rt') as fich:
+        for linha in linhas_relevantes(fich):
+            prods.append(Produto.from_csv(linha, delim))
+    return prods
+
+
+def linhas_relevantes(fich: TextIO):
+    for linha in fich:
+        linha = linha.strip()
+        if len(linha) == 0 or linha[0] == '#':
+            continue
+        yield linha
+
+
+##################################################################################
+##
+##       MENU, OPÇÕES E INTERACÇÃO COM UTILIZADOR
+##
+##################################################################################
+
+
+def exibe_msg(*args, ident = DEFAULT_INDENTATION, **kargs):
+    print(' ' * (ident - 1), *args, **kargs)
+
+
+def entrada(msg: str, ident = DEFAULT_INDENTATION):
+    return input(f"{' ' * DEFAULT_INDENTATION}{msg}")
+
+
+def cls():
+    if sys.platform == 'win32':
+        subprocess.run(['cls'], shell=True, check=True)
+    elif sys.platform in ('darwin', 'linux', 'bsd', 'unix'):
+        subprocess.run(['clear'], check=True)
+
+
+def pause(msg: str="Pressione ENTER para continuar...", ident = DEFAULT_INDENTATION):
+    input(f"{' ' * ident}{msg}")
+
+
+produtos : CatalogoProdutos | None = None
+
+
+def exec_menu():
+    """
+    - Lista o catálogo 
+    - Pesquisar por alguns campos
+    - Eliminar um registo do catálogo
+    - Guardar o catálogo em ficheiro
+    """
+
+    while True:
+        cls()
+        exibe_msg("*******************************************")
+        exibe_msg("* L - Listar catálogo                     *")
+        exibe_msg("* P - Pesquisar por id                    *")
+        exibe_msg("* A - Acrescentar produto                 *")
+        exibe_msg("* E - Eliminar produto                    *")
+        exibe_msg("* G - Guardar catálogo em ficheiro        *")
+        exibe_msg("*                                         *")
+        exibe_msg("* T - Terminar programa                   *")
+        exibe_msg("*******************************************")
+
+        print()
+        opcao = entrada("OPCAO> ").strip().upper()
+
+        if opcao in ('L', 'LISTAR'):
+            exec_listar()
+        elif opcao in ('T', 'TERMINAR'):
+            break
+            exec_terminar()
+        else:
+            exibe_msg(f"Opção {opcao} inválida!")
+            pause()
+
+
+def exec_listar():
+    cabecalho = f'{"ID":^8}|{"Nome":^26}|{"Tipo":^8}|{"Quantidade":^16}|{"Preço":^16}'
+    separador = f'{"-" * 8}+{"-" * 26}+{"-" * 8}+{"-" * 16}+{"-" * 16}'
+    # separador =  '|'.join(['-' * 16] * 5)
+    print()
+    exibe_msg(cabecalho)
+    exibe_msg(separador)
+    for prod in produtos:
+        linha = f'{prod.id_:^8}|{prod.nome:^26}|{prod.tipo:^8}|{prod.quantidade:^16}|{prod.preco:^16}'
+        exibe_msg(linha)
     
-    produtos._dump()
+    exibe_msg(separador)
+    print()
+    pause()
+
+
+def exec_terminar():
+    sys.exit(0)
+
+
+
+def main() -> None:
+    global produtos
+    produtos = le_produtos('produtos.csv')
+    exec_menu()
 
 
 if __name__ == '__main__':
