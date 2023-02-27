@@ -1,0 +1,277 @@
+:root {
+    --button-main-color: #26a9e0;
+    --button-hover-color: #85d6de;
+    --focus-color: var(--button-main-color);
+    --status-error-content: '\274C';
+    --status-success-content: '\2713';
+    --status-error-color: rgb(224, 18, 18);
+    --status-ok-content: '\2705';
+    --status-ok-bgc: green;
+    --status-ok-color: rgb(50, 193, 50);
+    --required-color: rgb(187, 6, 6);
+}
+
+body,
+div,
+form,
+input,
+select,
+p {
+    outline: 0;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 12pt;
+    color: #eee;
+}
+
+body {
+    background: rgba(0, 0, 0, 0.5) url("hardware.jpg") no-repeat center;
+    background-size: cover;
+}
+
+main {
+    /* border: 1px solid red; */
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    /* flex-direction is set in the media queries */
+    justify-content: center;
+    align-items: center;
+}
+
+h1,
+h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+h2 {
+    margin: 0 0 0 8px;
+}
+
+.left-part,
+form {
+    padding: 25px;
+}
+
+.left-part {
+    text-align: center;
+}
+
+form {
+    background: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.submission-status {
+    min-height: 3em;
+    border: 1px solid #eee;
+    padding: 1em;
+    box-sizing: border-box;
+    margin: 1em 0;
+    font-weight: bold;
+    font-size: larger;
+    display: none;
+}
+
+.submission-status-ok {
+    color: var(--status-ok-color);
+    display: block;
+}
+
+.submission-status-error {
+    color: var(--status-error-color);
+    display: block;
+}
+
+input,
+select {
+    padding: 5px;
+    margin-bottom: 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+
+input::placeholder {
+    color: #eee;
+}
+
+input:focus {
+    border-bottom: 2px solid var(--focus-color);
+}
+
+.field {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: baseline;
+}
+
+.field > input, .field > select {
+    flex: 1 0;
+    margin-left: 1em;
+}
+
+.status {
+    font-weight: bold;
+    font-size: 15pt;
+    background-color: transparent;
+    width: 1em;
+}
+
+.status-error::before {
+    content: var(--status-error-content);
+    display: inline;
+}
+
+.status-success::before {
+    content: var(--status-success-content);
+    display: inline;
+}
+
+.required {
+    color: var(--required-color);
+}
+
+option:focus {
+    border: none;
+}
+
+option {
+    background: black;
+    border: none;
+}
+
+.checkbox {
+    padding: 0.5em;
+}
+
+.checkbox-error {
+    outline: 1px solid #eee;
+    background-color: var(--error-color);
+}
+
+.checkbox input {
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+}
+
+.checkbox a {
+    color: var(--button-main-color);
+}
+
+.checkbox a:hover {
+    color: var(--button-hover-color);
+}
+
+.btn-item,
+button {
+    padding: 10px 5px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    background: var(--button-main-color);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    display: inline-block;
+    min-width: 10em;
+}
+
+.btn-item {
+    display: inline-block;
+    margin: 20px 5px 0;
+}
+
+button {
+    width: 100%;
+}
+
+button:hover,
+.btn-item:hover {
+    background: #85d6de;
+}
+
+@media (max-width: 575px) {
+    main {
+        flex-direction: column;
+    }
+
+    form {
+        /* 
+        flex: 0 0 400px; => note that when flex-dir is column 
+        flex-grow/shrink/basis refer to the heigth not to the width
+        */
+        max-width: 400px;
+    }
+
+    .field > label {
+        display: none;
+    }
+
+    .field input::placeholder {
+        opacity: 1;
+    }
+
+    .checkbox {
+        font-size: smaller;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 767px) {
+    main {
+        flex-direction: row;
+        padding: 50px;
+    }
+
+    form {
+        flex: 0 0 400px;
+    }
+
+    .field > label {
+        display: none;
+    }
+
+    .field input::placeholder {
+        opacity: 1;
+    }
+
+    .checkbox {
+        font-size: smaller;
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        flex-direction: row;
+        padding: 50px;
+    }
+
+    form {
+        flex: 0 0 500px;
+    }
+
+    .field > label {
+        flex-basis: 10em;
+        display: inline-block;
+    }
+
+    .field input::placeholder {
+        opacity: 0;
+    }
+}

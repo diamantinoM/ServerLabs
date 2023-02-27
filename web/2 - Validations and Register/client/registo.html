@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="registo.css">
+    <script type="module" src="registo.js" defer></script>
+    <!-- <meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://127.0.0.1:8000"> -->
+</head>
+
+<body>
+    <main>
+        <div class="left-part">
+            <i class="fa fa-table-tennis fa-4x"></i>
+            <h1>Torneio da Primavera</h1>
+            <p>Prémios até ao 10&#x2070; lugar</p>
+            <div class="btn-group">
+                <a class="btn-item" href="#">Regulamento</a>
+                <a class="btn-item" href="#">Membros</a>
+            </div>
+        </div>
+        <form autocomplete="off" novalidate>
+            <div class="title">
+                <i class="fas fa-pencil-alt"></i>
+                <h2>Inscreva-se aqui</h2>
+            </div>
+            <div class="submission-status"></div>
+            <div class="info">
+                <div class="field">
+                    <label>Nome completo <span class="required">*</span></label>
+                    <input  type="text" name="fullName" required autofocus
+                            data-validation="fullName"
+                            value="Alberto Antunes"
+                            placeholder="Nome completo *">
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>Email <span class="required">*</span></label>
+                    <input  type="text" name="email" required
+                            data-validation="emailAddr"
+                            value="alb@mail.com"
+                            placeholder="Email *">
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>Telefone</label>
+                    <input  type="text" name="phoneNumber"
+                            data-validation="coeficiente"
+                            value="+351928151490"
+                            placeholder="Telefone">
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>Data de nascimento</label>
+                    <input  type="text" id="birthDate" name="birthDate"
+                            data-validation="date_DD/MM/YYYY"
+                            value="20/03/1993"
+                            placeholder="Data nascimento (DD/MM/AAAA)">
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>Senha <span class="required">*</span></label>
+                    <input  type="password" id="password" name="password" required
+                            data-validation="password"
+                            value="Abc12#"
+                            placeholder="Senha *">
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>Senha de novo <span class="required">*</span></label>
+                    <input  type="password" name="password" required
+                            data-validation="confirmPassword"
+                            value="Abc12#"
+                            placeholder="Senha de novo *" >
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>Nível</label>
+                    <select id="level" name="level" required data-validation>
+                        <option value="beginner" selected>Iniciado</option>
+                        <option value="intermediate">Intermédio</option>
+                        <option value="advanced">Avançado</option>
+                        <option value="pre-pro">Pré-Profissional</option>
+                        <option value="pro">Profissional</option>
+                    </select>
+                    <span class="status"></span>
+                </div>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" name="privacyPolice" required 
+                        checked="true"
+                        data-validation>
+                <span>
+                    Li e concordo com a 
+                    <a href="https://www.ttennis.com/privacy-policy">Política de privacidade</a>.
+                </span>
+                <span class="status"></span>
+            </div>
+            <button type="button" id="submit" href="/">Submeter</button>
+            <button type="button" id="reset" href="/">Limpar</button>
+        </form>
+    </main>
+</body>
+</html>
