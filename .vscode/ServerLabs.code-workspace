@@ -5,6 +5,9 @@
         }
     ],
     "settings": {
-        
+        "liveServer.settings.ignoreFiles": [
+            ".vscode/**",
+            "**/*.db"
+        ]
     }
 }

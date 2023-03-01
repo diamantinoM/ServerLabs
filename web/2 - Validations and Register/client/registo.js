@@ -39,16 +39,16 @@ window.addEventListener('load', function() {
 
 async function validateAndSubmitForm() {
     if (!validateAllFields()) {
-        return
+        return;
     }
     try {
         const [responseOK, responseData] = await registerPlayer();
         const showStatusFn = responseOK ? showSuccess : showError;
         showStatusFn(responseData);
-    }
+    } 
     catch (error) {
-        console.error(`ERROR: An error has ocurred connecting to server at ${URL}`)
-        console.error(error)
+        showSubmissionInfo(`ERROR: An error has ocurred when connecting to server at ${URL}`, false);
+        console.error(error);
     }
 }
 
@@ -66,7 +66,6 @@ async function registerPlayer() {
     return [response.ok, await response.json()];
 }
 
-
 /**
  * @param {Object} responseData 
  */
@@ -81,6 +80,7 @@ Email: ${responseData.email}`;
     elemsToHide.forEach(elem => elem.style.display = 'none');
     showSubmissionInfo(msg, true);
 }
+
 
 /**
  * @param {Object} responseData 
