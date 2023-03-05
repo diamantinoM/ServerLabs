@@ -14,76 +14,88 @@
     <main>
         <div class="left-part">
             <i class="fa fa-table-tennis fa-4x"></i>
-            <h1>Torneio da Primavera</h1>
-            <p>Prémios até ao 10&#x2070; lugar</p>
+            <h1>{{tr TOURNAMENT_NAME}}</h1>
+            <p>{{tr TOURNAMENT_PRIZES}}</p>
             <div class="btn-group">
-                <a class="btn-item" href="#">Regulamento</a>
-                <a class="btn-item" href="#">Membros</a>
+                <a class="btn-item" href="#">{{tr RULES}}</a>
+                <a class="btn-item" href="#">{{tr MEMBERS}}</a>
             </div>
+            <button id="pt_PT">{{tr LANGUAGE_OPTION1}}</button>
+            <button id="en_US">{{tr LANGUAGE_OPTION2}}</button>
         </div>
         <form autocomplete="off" novalidate>
             <div class="title">
                 <i class="fas fa-pencil-alt"></i>
-                <h2>Inscreva-se aqui</h2>
+                <h2>{{tr ENROLL_HERE}}</h2>
             </div>
             <div class="submission-status"></div>
             <div class="info">
                 <div class="field">
-                    <label>Nome completo <span class="required">*</span></label>
+                    <label>{{tr FULL_NAME_LABEL}} <span class="required">*</span></label>
                     <input  type="text" name="fullName" required autofocus
                             data-validation="fullName"
                             value="Alberto Antunes"
-                            placeholder="Nome completo *">
+                            placeholder="{{tr FULL_NAME_LABEL}} *">
                     <span class="status"></span>
                 </div>
                 <div class="field">
-                    <label>Email <span class="required">*</span></label>
+                    <label>{{tr EMAIL_ADDR_LABEL}} <span class="required">*</span></label>
                     <input  type="text" name="email" required
                             data-validation="emailAddr"
                             value="alb@mail.com"
-                            placeholder="Email *">
+                            placeholder="{{tr EMAIL_ADDR}} *">
                     <span class="status"></span>
                 </div>
                 <div class="field">
-                    <label>Telefone</label>
+                    <label>{{tr PHONE_NUMBER_LABEL}}</label>
                     <input  type="text" name="phoneNumber"
                             data-validation="phoneNumber"
                             value="+351928151490"
-                            placeholder="Telefone">
+                            placeholder="{{tr PHONE_NUMBER_LABEL}}">
                     <span class="status"></span>
                 </div>
                 <div class="field">
-                    <label>Data de nascimento</label>
+                    <label>{{tr BIRTH_DATE_LABEL}}</label>
                     <input  type="text" id="birthDate" name="birthDate"
                             data-validation="date_DD/MM/YYYY"
                             value="20/03/1993"
-                            placeholder="Data nascimento (DD/MM/AAAA)">
+                            placeholder="{{tr BIRTH_DATE_LABEL}} {{tr DATE_FMT}}">
                     <span class="status"></span>
                 </div>
                 <div class="field">
-                    <label>Senha <span class="required">*</span></label>
+                    <label>{{tr PASSWORD_LABEL}} <span class="required">*</span></label>
                     <input  type="password" id="password" name="password" required
                             data-validation="password"
                             value="Abc12#"
-                            placeholder="Senha *">
+                            placeholder="{{tr PASSWORD_LABEL}} *">
                     <span class="status"></span>
                 </div>
                 <div class="field">
-                    <label>Senha de novo <span class="required">*</span></label>
+                    <label>{{tr REPEAT_PASSWORD_LABEL}} <span class="required">*</span></label>
                     <input  type="password" name="password" required
                             data-validation="confirmPassword"
                             value="Abc12#"
-                            placeholder="Senha de novo *" >
+                            placeholder="{{tr REPEAT_PASSWORD_LABEL}} *" >
                     <span class="status"></span>
                 </div>
                 <div class="field">
-                    <label>Nível</label>
+                    <label>{{tr PLAYER_LEVEL_LABEL}}</label>
                     <select id="level" name="level" required data-validation>
-                        <option value="beginner" selected>Iniciado</option>
-                        <option value="intermediate">Intermédio</option>
-                        <option value="advanced">Avançado</option>
-                        <option value="pre-pro">Pré-Profissional</option>
-                        <option value="pro">Profissional</option>
+                        <option value="beginner" selected>{{tr BEGINNER_LEVEL}}</option>
+                        <option value="intermediate">{{tr INTERMEDIATE_LEVEL}}</option>
+                        <option value="advanced">{{tr ADVANCED_LEVEL}}</option>
+                        <option value="pre-pro">{{tr PRE_PRO_LEVEL}}</option>
+                        <option value="pro">{{tr PRO_LEVEL}}</option>
+                    </select>
+                    <span class="status"></span>
+                </div>
+                <div class="field">
+                    <label>{{tr TOURNAMENT_NAME_LABEL}}</label>
+                    <select id="level_" name="level_" required data-validation>
+                        <option value="Spring" selected>{{tr SPRING_LEVEL}}</option>
+                        <option value="Summer">{{tr SUMMER_LEVEL}}</option>
+                        <option value="Fall">{{tr FALL_LEVEL}}</option>
+                        <option value="Winter">{{tr WINTER_LEVEL}}</option>
                     </select>
                     <span class="status"></span>
                 </div>
@@ -93,13 +105,13 @@
                         checked="true"
                         data-validation>
                 <span>
-                    Li e concordo com a 
-                    <a href="https://www.ttennis.com/privacy-policy">Política de privacidade</a>.
+                    {{tr PRIVACY_POLICY_MSG}}
+                    <a href="https://www.ttennis.com/privacy-policy">{{tr PRIVACY_POLICY}}</a>.
                 </span>
                 <span class="status"></span>
             </div>
-            <button type="button" id="submit" href="/">Submeter</button>
-            <button type="button" id="reset" href="/">Limpar</button>
+            <button type="button" id="submit" href="/">{{tr SUBMIT_BTN}}</button>
+            <button type="button" id="reset" href="/">{{tr RESET_BTN}}</button>
         </form>
     </main>
 </body>

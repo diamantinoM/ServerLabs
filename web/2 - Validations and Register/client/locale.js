@@ -1,9 +1,9 @@
 export {
-    // tr,
-    // trDoc,
-    // setCurrentLanguage,
-    // UnknownMessageID,
-    // UnknownLanguage,
+    tr,
+    trDoc,
+    setCurrentLanguage,
+    UnknownMessageID,
+    UnknownLanguage,
 }
 /*
     No código HTML, em vez de (por exemplo):
@@ -48,6 +48,13 @@ const userMessages = {
         PRO_LEVEL: "Professional",
         SUBMIT_BTN: "Submit",
         RESET_BTN: "Reset",
+        LANGUAGE_OPTION1: "Portuguese",
+        LANGUAGE_OPTION2: "English",
+        TOURNAMENT_NAME_LABEL: "Tournament",
+        SPRING_LEVEL: "Spring",
+        SUMMER_LEVEL: "Summer",
+        WINTER_LEVEL: "Winter",
+        FALL_LEVEL: "Fall",
     },
     pt_PT: {
         ERR_ENROLLING: "Não foi possível concluir a inscrição.",
@@ -79,6 +86,13 @@ const userMessages = {
         PRO_LEVEL: "Profissional",
         SUBMIT_BTN: "Submeter",
         RESET_BTN: "Limpar",
+        LANGUAGE_OPTION1: "Português",
+        LANGUAGE_OPTION2: "Inglês",
+        TOURNAMENT_NAME_LABEL: "Torneio",
+        SPRING_LEVEL: "Primavera",
+        SUMMER_LEVEL: "Verão",
+        WINTER_LEVEL: "Inverno",
+        FALL_LEVEL: "Outono",
     },
 };
 
@@ -86,15 +100,41 @@ class UnknownMessageID extends Error {}
 
 class UnknownLanguage extends Error {}
 
-let currentLanguage = 'en_US';
+let currentLanguage = 'pt_PT';
 
 function setCurrentLanguage(newCurrentLanguage) {
-}
+  if (!userMessages[newCurrentLanguage]) {
+    throw new UnknownLanguage(`Language ${newCurrentLanguage} is not supported.`);
+  }
+  currentLanguage = newCurrentLanguage;
+} 
 
 function tr(messageID) {
-}
+  const message = userMessages[currentLanguage][messageID];
+  if (!message) {
+    throw new UnknownMessageID(`Message ID ${messageID} is not defined for language ${currentLanguage}.`);
+  }
+  return message;
+} 
 
-// const trDoc = (function() {
-   // const trDocRe = '' /* ... */;
-    // return function trDoc(ancestorNode) {
-// })(); 
+const trDoc = (function() {
+  const trDocRe = /{{tr\s([^}\s]+)\s*}}/g; 
+
+  return function trDoc(ancestorNode = document) {
+    ancestorNode.querySelectorAll('*').forEach(node => {
+      node.innerHTML = node.innerHTML.replace(trDocRe, (_, msg) => tr(msg));
+    })
+  }
+})();
+      // If you want to replace HTML like this : 
+      //
+      // '<img src="example.jpg" title="{{tr Example}}"/>' OR '<img src="example.png" alt="{{tr some text}}" />'.
+      //
+      // Then this function can help. The loop iterates over the title and alt attributes,
+      // and replaces their values with the translated version. 
+      //
+      // for (const attr of ['title', 'alt']) {
+      //   if (node.hasAttribute(attr)) {
+      //     node.setAttribute(attr, node.getAttribute(attr).replace(trDocRe, (_, msg) => tr(msg)));
+      //   }
+      // }

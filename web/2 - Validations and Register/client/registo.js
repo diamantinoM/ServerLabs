@@ -13,6 +13,14 @@ import {
     byPOSTasJSON,
 } from './utils.js';
 
+import {
+    tr,
+    trDoc,
+    setCurrentLanguage,
+    UnknownMessageID,
+    UnknownLanguage,
+} from './locale.js';
+
 
 const URL = 'http://127.0.0.1:8000';
 const TOURNAMENT_ID = 1;
@@ -32,9 +40,12 @@ addPredicates({
 });
 
 window.addEventListener('load', function() {
+    trDoc();
     installValidators();
     whenClick('reset', e => resetAllFields());
     whenClick('submit', validateAndSubmitForm);
+    // whenClick('pt_PT', () => setCurrentLanguage('pt_PT'));
+    // whenClick('en_US', () => setCurrentLanguage('en_US')); 
 });
 
 async function validateAndSubmitForm() {
@@ -70,7 +81,7 @@ async function registerPlayer() {
  * @param {Object} responseData 
  */
 function showSuccess(responseData) {
-    const msg = `Inscrição realizada com sucesso.<br>
+    const msg = `${tr('SUCCESS_ENROLLING')}<br>
 Player: ${responseData.full_name} <br>
 ID: ${responseData.id} <br>
 Email: ${responseData.email}`;
@@ -87,7 +98,7 @@ Email: ${responseData.email}`;
  */
 function showError(responseData) {
     const errorInfo = responseData.detail;
-    const msg = `Não foi possível concluir a inscrição. ${errorInfo.error_msg}`;
+    const msg = `${tr('ERR_ENROLLING')} ${errorInfo.error_msg}`;
     showSubmissionInfo(msg, false);
 }
 

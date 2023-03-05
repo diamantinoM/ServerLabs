@@ -49,8 +49,7 @@ class Tournament(Base):    # type: ignore (Pylance doesn't recognize Base)
     start_date  = Column(Date, nullable=False)
     end_date    = Column(Date, nullable=False)
 
-    players_enrolled = relationship("Player", back_populates="tournament")
-
+    enrollments = relationship("Enrollment", back_populates="tournament")
 
 # Tournament.players = relationship("Player", order_by=Player.id, back_populates="tournament")
 
@@ -67,9 +66,22 @@ class Player(Base):  # type: ignore  (Pylance )
     level           = Column(String(30), nullable=False)
     is_active       = Column(Boolean, default=True)
     tournament_id   = Column(Integer, ForeignKey("Tournament.id"))
-    tournament      = relationship("Tournament", back_populates="players_enrolled")
+
+    enrollments     = relationship("Enrollment", back_populates="player")
 
     # https://docs.sqlalchemy.org/en/13/orm/extensions/declarative/table_config.html
+
+
+class Enrollment(Base): # type: ignore  (Pylance )
+    __tablename__ = 'Enrollment'
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    player_id = Column(Integer, ForeignKey("Player.id"))
+    tournament_id = Column(Integer, ForeignKey("Tournament.id"))
+    enroll_date = Column(Date, nullable=False)
+
+    player = relationship("Player", back_populates="enrollments")
+    tournament = relationship("Tournament", back_populates="enrollments")
 
 
 def populate_db():
