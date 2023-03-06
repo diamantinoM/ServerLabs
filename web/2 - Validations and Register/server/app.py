@@ -116,7 +116,7 @@ Options:
     uvicorn.run('app:app', 
                 port = int(args['--port']),
                 host = args['--host'], 
-                reload = True
+                reload = args['--reload'],
             )
 
 
