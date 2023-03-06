@@ -2,3 +2,4 @@ fastapi
 uvicorn[standard]
 chameleon
 fastapi-chameleon
+aiofiles
