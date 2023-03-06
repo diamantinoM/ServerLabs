@@ -16,11 +16,31 @@ def main():
     start_uvicorn()
 
 
+def config():
+    print("[+] Configuring server")
+    config_routes()
+    print("[+] ...routes configured")
+    config_templates()
+    print("[+] ...templates configured")
+    print("[+] ...done configuring server")
+    
+
+def config_templates():
+    global_init('templates')
+
+
+def config_routes():
+    app.mount('/static', StaticFiles(directory='static'), name='static')
+    for view in [home, courses, account]:
+        app.include_router(view.router)
+    
+
 def start_uvicorn():
     import uvicorn 
     from docopt import docopt
     help_doc = """
-FastAPI Web server for the course management Web App
+# FastAPI Web server for the course management Web App
+
 
 Usage:
   app.py [-p PORT] [-h HOST_IP] [-r]
@@ -36,28 +56,8 @@ Options:
                 port = int(args['--port']),
                 host = args['--host'], 
                 reload = args['--reload'],
-                reload_includes=['*.pt',]
+                reload_includes=['*.pt','*.css']
             )
-
-
-def config():
-    print("[+] Configuring server")
-    config_routes()
-    print("[+] ..routes configured")
-    config_templates()
-    print("[+] ...templates configured")
-    print("[+] ...done configuring server")
-    
-
-def config_templates():
-    global_init('templates')
-
-
-def config_routes():
-    app.mount('/static', StaticFiles(directory='static'), name='static')
-    for view in [home, courses, account]:
-        app.include_router(view.router)
-    
 
 
 if __name__ == '__main__':
