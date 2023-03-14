@@ -81,22 +81,24 @@
         
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                   <div class="swiper-wrapper">
-                  <__repeat__ tal:repeat="testimonial testimonials" tal:omit-tag="True">
-                      <div class="swiper-slide">
-                        <div class="testimonial-wrap">
-                          <div class="testimonial-item">
-                            <img src="/static/assets/img/testimonials/testimonials-${testimonial.user_id}.jpg" class="testimonial-img" alt="">
-                            <h3>${testimonial.user_name}</h3>
-                            <h4>${testimonial.user_occupation}</h4>
-                            <p>
-                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                              ${testimonial.text}
-                              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                            </p>
-                          </div>
-                        </div>
-                      </div><!-- End testimonial item -->
+
+                    <__repeat__ tal:repeat="testimonial testimonials" tal:omit-tag="True">
+                        <div class="swiper-slide">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                <img src="/static/assets/img/testimonials/testimonials-${testimonial.user_id}.jpg" class="testimonial-img" alt="">
+                                <h3>${testimonial.user_name}</h3>
+                                <h4>${testimonial.user_occupation}</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    ${testimonial.text}
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
                     </__repeat__>
+
                   </div>
                   <div class="swiper-pagination"></div>
                 </div>
@@ -105,6 +107,5 @@
             </section><!-- End Testimonials Section -->
           </main><!-- End #main -->
         
-
     </div>
 </div>

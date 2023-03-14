@@ -1,6 +1,7 @@
 from decimal import Decimal as dec
 from dataclasses import dataclass
 
+
 @dataclass
 class Course:
     id: int
@@ -8,9 +9,12 @@ class Course:
     price: dec
     name: str
     summary: str
+    description: str
     trainer_id: int
     trainer_name: str
-
+    schedule: str
+    available_seats: int
+#:
 
 @dataclass
 class Trainer:
@@ -22,7 +26,7 @@ class Trainer:
     facebook: str
     instagram: str
     linkedin: str
-
+#:
 
 @dataclass
 class Testimonial:
@@ -30,14 +34,4 @@ class Testimonial:
     user_name: str
     user_occupation: str
     text: str
-
-
-# @dataclass
-# class CourseDetails:
-#     id: int
-#     name: str
-#     description: str
-#     trainer_name: str
-#     price: dec(280)
-#     available_seats: int
-#     schedule: int
+#:

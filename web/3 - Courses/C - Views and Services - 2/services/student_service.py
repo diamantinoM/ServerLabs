@@ -2,7 +2,7 @@ from typing import List
 
 from data.models import Testimonial
 
-def student_count():
+def student_count() -> int:
     return 2315
 
 
