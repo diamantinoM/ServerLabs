@@ -12,11 +12,10 @@ TESTIMONIALS_COUNT = 5
 
 router = APIRouter()
 
-@router.get('/')                            # type: ignore
+@router.get('/')
 @template()
 async def index(response: Request):
     return index_viewmodel()
-#:
 
 def index_viewmodel():
     return base_viewmodel_with({
@@ -27,13 +26,13 @@ def index_viewmodel():
         'popular_courses': course_service.most_popular_courses(POPULAR_COURSES_COUNT),
         'selected_trainers': trainer_service.selected_trainers(SELECTED_TRAINERS_COUNT) 
     })
-#:
 
-@router.get('/about')                        # type: ignore
+
+@router.get('/about')
 @template()
 async def about(request: Request):
     return about_viewmodel()
-#:
+
 
 def about_viewmodel(): 
     return base_viewmodel_with({
@@ -43,6 +42,3 @@ def about_viewmodel():
         'num_events': 159,
         'testimonials': student_service.get_testimonials(TESTIMONIALS_COUNT)
     })
-#:
-
-

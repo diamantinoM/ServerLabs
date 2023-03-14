@@ -14,7 +14,7 @@ class Course:
     trainer_name: str
     schedule: str
     available_seats: int
-#:
+
 
 @dataclass
 class Trainer:
@@ -26,7 +26,7 @@ class Trainer:
     facebook: str
     instagram: str
     linkedin: str
-#:
+
 
 @dataclass
 class Testimonial:
@@ -34,4 +34,4 @@ class Testimonial:
     user_name: str
     user_occupation: str
     text: str
-#:
+
