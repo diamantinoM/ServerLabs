@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from fastapi_chameleon import global_init
 from fastapi.staticfiles import StaticFiles
-import uvicorn
 
 from views import (
     home,
     courses,
     account,
 )
+from common.fastapi_utils import add_global_request_middleware
+
 
 app = FastAPI()
 
@@ -18,12 +19,17 @@ def main():
 
 def config():
     print("[+] Configuring server")
+    config_middleware()
+    print("[+] ...middleware configured")
     config_routes()
     print("[+] ...routes configured")
     config_templates()
     print("[+] ...templates configured")
     print("[+] ...done configuring server")
 
+
+def config_middleware():
+    add_global_request_middleware(app)
 
 def config_templates(): 
     global_init('templates')

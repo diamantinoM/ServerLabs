@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi_chameleon import template
 
-from common import base_viewmodel_with
+from common.viewmodel import ViewModel
 from services import course_service 
 
 router = APIRouter()
@@ -15,9 +15,9 @@ async def courses():
 
 
 def courses_viewmodel():
-    return base_viewmodel_with({
-        'available_courses': course_service.available_courses(AVAILABLE_COURSES_COUNT)
-    })
+    return ViewModel(
+        available_courses = course_service.available_courses(AVAILABLE_COURSES_COUNT)
+    )
 
 
 @router.get('/courses/{course_id}')                           
@@ -28,11 +28,11 @@ async def course_details(course_id: int):
 
 def course_details_viewmodel(course_id: int):
     if course := course_service.get_course_by_id(course_id):
-        return base_viewmodel_with({
-            'course': course
-        })
-    return base_viewmodel_with({
-        'error': True,
-        'error_msg': 'Course not found',
-    })
+        return ViewModel(
+            course = course
+        )
+    return ViewModel(
+        error = True,
+        error_msg = 'Course not found',
+    )
 
